@@ -44,9 +44,11 @@ func (srv *SrvFrm) loadDatabase(createTableFunc func(*sql.DB) error) error {
 		return err
 	}
 
-	err = createTableFunc(srv.db)
-	if err != nil {
-		return err
+	if createTableFunc != nil {
+		err = createTableFunc(srv.db)
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

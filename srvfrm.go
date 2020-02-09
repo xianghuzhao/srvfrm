@@ -31,6 +31,11 @@ func New(name, version string) *SrvFrm {
 	}
 }
 
+// SetDefaultConfig sets the default config
+func (srv *SrvFrm) SetDefaultConfig(defaultConfig string) {
+	srv.DefaultConfig = defaultConfig
+}
+
 // SetAppConfig sets the app config
 func (srv *SrvFrm) SetAppConfig(appConfig interface{}) {
 	srv.cfg.App = appConfig
