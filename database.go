@@ -6,7 +6,7 @@ import (
 	"database/sql"
 )
 
-func (srv *SrvFrm) loadDatabase(createTableFunc func(*sql.DB) error) error {
+func (srv *SrvFrm) loadDatabase() error {
 	cfgDb := srv.cfg.Database
 
 	connStr := "host=" + cfgDb.Host
@@ -44,8 +44,8 @@ func (srv *SrvFrm) loadDatabase(createTableFunc func(*sql.DB) error) error {
 		return err
 	}
 
-	if createTableFunc != nil {
-		err = createTableFunc(srv.db)
+	if srv.preDBFunc != nil {
+		err = srv.preDBFunc(srv.db)
 		if err != nil {
 			return err
 		}

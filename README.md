@@ -7,11 +7,14 @@ Simplify the construction of a HTTP API server, mostly for my personal use.
 ## Example
 
 ```go
-import "github.com/xianghuzhao/srvfrm"
+import (
+	_ "github.com/lib/pq"
+	"github.com/xianghuzhao/srvfrm"
+)
 
 func main() {
-    srv := srvfrm.New("MyServer", "1.2.0")
-    srv.Run()
+	srv := srvfrm.New("MyServer", "1.2.0")
+	srv.Run()
 }
 ```
 

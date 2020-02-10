@@ -18,8 +18,8 @@ type SrvFrm struct {
 	cfg *config
 	db  *sql.DB
 
-	CreateTableFunc func(*sql.DB) error
-	RouterFunc      func(*gin.Engine) error
+	preDBFunc  func(*sql.DB) error
+	routerFunc func(*gin.Engine) error
 }
 
 // New creates a new SrvFrm instance
@@ -41,14 +41,14 @@ func (srv *SrvFrm) SetAppConfig(appConfig interface{}) {
 	srv.cfg.App = appConfig
 }
 
-// SetCreateTableFunc sets the create table function
-func (srv *SrvFrm) SetCreateTableFunc(f func(*sql.DB) error) {
-	srv.CreateTableFunc = f
+// SetPreDBFunc sets the create table function
+func (srv *SrvFrm) SetPreDBFunc(f func(*sql.DB) error) {
+	srv.preDBFunc = f
 }
 
 // SetRouterFunc sets the custom router function
 func (srv *SrvFrm) SetRouterFunc(f func(*gin.Engine) error) {
-	srv.RouterFunc = f
+	srv.routerFunc = f
 }
 
 func (srv *SrvFrm) printVersion() {
@@ -84,7 +84,7 @@ func (srv *SrvFrm) Run() {
 	}
 	defer destroyLog()
 
-	err = srv.loadDatabase(srv.CreateTableFunc)
+	err = srv.loadDatabase()
 	if err != nil {
 		log.Fatalln(err)
 	}
