@@ -15,11 +15,11 @@ type SrvFrm struct {
 	Version       string
 	DefaultConfig string
 
-	cfg *config
+	cfg *Config
 	db  *sql.DB
 
-	preDBFunc  func(*sql.DB) error
-	routerFunc func(*gin.Engine) error
+	preDBFunc  func(*sql.DB, *Config) error
+	routerFunc func(*gin.Engine, *sql.DB, *Config) error
 }
 
 // New creates a new SrvFrm instance
@@ -42,12 +42,12 @@ func (srv *SrvFrm) SetAppConfig(appConfig interface{}) {
 }
 
 // SetPreDBFunc sets the create table function
-func (srv *SrvFrm) SetPreDBFunc(f func(*sql.DB) error) {
+func (srv *SrvFrm) SetPreDBFunc(f func(*sql.DB, *Config) error) {
 	srv.preDBFunc = f
 }
 
 // SetRouterFunc sets the custom router function
-func (srv *SrvFrm) SetRouterFunc(f func(*gin.Engine) error) {
+func (srv *SrvFrm) SetRouterFunc(f func(*gin.Engine, *sql.DB, *Config) error) {
 	srv.routerFunc = f
 }
 

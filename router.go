@@ -67,7 +67,7 @@ func (srv *SrvFrm) loadRouter() (*gin.Engine, error) {
 	router.Use(serverHeader(srv.Name))
 
 	if srv.routerFunc != nil {
-		srv.routerFunc(router)
+		srv.routerFunc(router, srv.db, srv.cfg)
 	}
 
 	return router, nil

@@ -45,7 +45,7 @@ func (srv *SrvFrm) loadDatabase() error {
 	}
 
 	if srv.preDBFunc != nil {
-		err = srv.preDBFunc(srv.db)
+		err = srv.preDBFunc(srv.db, srv.cfg)
 		if err != nil {
 			return err
 		}

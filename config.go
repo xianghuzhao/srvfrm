@@ -29,7 +29,8 @@ server:
   api_host: https://example.com
 `
 
-type config struct {
+// Config keeps the configuration
+type Config struct {
 	Log struct {
 		GinReleaseMode bool   `yaml:"gin_release_mode"`
 		Tty            bool   `yaml:"tty"`
@@ -58,7 +59,7 @@ type config struct {
 }
 
 func (srv *SrvFrm) loadConfig(fn string) error {
-	srv.cfg = &config{}
+	srv.cfg = &Config{}
 
 	err := srv.loadDefaultConfig()
 	if err != nil {
