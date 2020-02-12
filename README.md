@@ -1,5 +1,7 @@
 # SrvFrm
 
+[![GoDoc](https://godoc.org/github.com/xianghuzhao/srvfrm?status.svg)](https://godoc.org/github.com/xianghuzhao/srvfrm)
+
 A very simple go HTTP API server framework.
 Simplify the construction of a HTTP API server, mostly for my personal use.
 
